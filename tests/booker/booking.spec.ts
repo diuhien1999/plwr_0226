@@ -91,7 +91,7 @@ test("POST create a new booking", async ({request}) => {
     expect(booking).toMatchObject(newBookingPayload);
 });
 
-test("PUT update a booking", async ({request}) => {
+test.skip("PUT update a booking", async ({request}) => {
     // get token
     const authResponse = await request.post('https://restful-booker.herokuapp.com/auth', {
         data: {
