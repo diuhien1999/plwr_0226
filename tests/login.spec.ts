@@ -1,54 +1,30 @@
-import { test, expect } from '@playwright/test';
+// import { test, expect } from '@playwright/test';
+// import { LoginPage } from './pages/login.page';
 
-test('test', async ({ page }) => {
-  await page.goto('https://the-internet.herokuapp.com/login');
-  await page.getByRole('textbox', { name: 'Username' }).click();
-  await page.getByRole('textbox', { name: 'Username' }).fill('tomsmith');
-  await page.getByRole('textbox', { name: 'Password' }).click();
-  await page.getByRole('textbox', { name: 'Password' }).fill('SuperSecretPassword!');
-  await page.getByRole('button', { name: ' Login' }).click();
+// test('should successfully login with valid credentials', async ({ page }) => {
+//   const loginPage = new LoginPage(page);
+//   //arrange
+//   loginPage.goto();
+//   //actions
+//   loginPage.login('tomsmith', 'SuperSecretPassword!');
+//   // //assertions
+//   await expect(await loginPage.getSuccessFlashMessage())
+//   .toContainText('You logged into a secure area!'); 
+  
+//   await expect(await loginPage.getWelcomeMessage())
+//   .toContainText('Welcome to the Secure Area. When you are done click logout below.');
+// });
+
+
+import { test , expect } from './fixtures/the-internet.fixture';
+
+test('should successfully login with valid credentials', async ({loginPage }) =>{
+  await loginPage.goto();
+  await loginPage.login('tomsmith', 'SuperSecretPassword!');
+
+  await expect(await loginPage.getSuccessFlashMessage())
+  .toContainText('You logged into a secure area!'); 
+  
+  await expect(await loginPage.getWelcomeMessage())
+  .toContainText('Welcome to the Secure Area. When you are done click logout below.');
 });
-
-test('locator with get label', async ({ page }) => {
-  await page.goto('https://the-internet.herokuapp.com/login');
-  await page.getByLabel('Username').click();
-  await page.getByLabel('Username').fill('tomsmith');
-  await page.getByLabel('Password').click();
-  await page.getByLabel('Password').fill('SuperSecretPassword!');
-  await page.getByRole('button', { name: ' Login' }).click();
-});
-
-test('locator with get CSS & XPath', async ({ page }) => {
-    await page.goto('https://the-internet.herokuapp.com/login');
-    await page.locator('#username').click();
-    await page.locator('#username').fill('tomsmith');
-    await page.locator('#password').click();
-    await page.locator('#password').fill('SuperSecretPassword!');
-    await page.locator('//button[@type="submit"]').click();
-});
-
-test('locator with get ID (CSS)', async ({ page }) => {
-    await page.goto('https://the-internet.herokuapp.com/login');
-    await page.locator('#username').click();
-    await page.locator('#username').fill('tomsmith');
-    await page.locator('#password').click();
-    await page.locator('#password').fill('SuperSecretPassword!');
-    await page.locator('#login').click();
-});
-
-test('locator ', async ({ page }) => {
-    await page.goto('https://the-internet.herokuapp.com/login');
-    await page.locator('input[name="username"]').fill('tomsmith');
-    await page.locator('input[name="password"]').fill('SuperSecretPassword!');
-    await page.locator('button[type="submit"]').click();
-});
-
-test('locator by xpath', async ({ page }) => {
-    //relative path
-    await page.goto('https://the-internet.herokuapp.com/login');
-    await page.locator('//input[@name="username"]').fill('tomsmith');
-    await page.locator('//input[@name="password"]').fill('SuperSecretPassword!');
-    await page.locator('//button[@type="submit"]').click();
-});
-
-
