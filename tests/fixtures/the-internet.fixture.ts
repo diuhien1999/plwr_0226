@@ -5,6 +5,7 @@ import { TablePage } from '../pages/table.page';
 import { ContextClickPage } from '../pages/contextClick.page'; 
 import { DragDropPage } from '../pages/dragDrop.page';
 import { DropdownPage } from '../pages/dropdown.page';
+import { NotificationMessagePage } from '../pages/notificationMessage.page';
 
 type TheInternetFixtures = {
     loginPage: LoginPage,
@@ -12,7 +13,8 @@ type TheInternetFixtures = {
     tablePage: TablePage,
     dropdownPage: DropdownPage,
     dragDropPage: DragDropPage, 
-    contextClickPage: ContextClickPage
+    contextClickPage: ContextClickPage,
+    notificationMessagePage: NotificationMessagePage
 }
 
 export const test = base.extend<TheInternetFixtures>({
@@ -39,6 +41,10 @@ export const test = base.extend<TheInternetFixtures>({
     dropdownPage: async ({ page }, use) => {
         const dropdownPage = new DropdownPage(page);
         await use(dropdownPage);   
+    },
+    notificationMessagePage: async ({ page }, use) => {
+        const notificationMessagePage = new NotificationMessagePage(page);
+        await use(notificationMessagePage);
     }
 });
 
